@@ -317,7 +317,6 @@ bool SharedMemory::ShareToProcessCommon(ProcessHandle process,
                                         SharedMemoryHandle* new_handle,
                                         bool close_self,
                                         ShareMode share_mode) {
-  ALLOW_UNUSED_PARAM(process);
   bool success = Share(new_handle, share_mode);
   if (close_self) {
     Unmap();
