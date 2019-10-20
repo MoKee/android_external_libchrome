@@ -247,7 +247,8 @@ std::unique_ptr<MessagePump> MessageLoop::CreateMessagePumpForType(Type type) {
     if (message_pump_for_ui_factory_)
       return message_pump_for_ui_factory_();
 #if defined(OS_IOS) || defined(OS_MACOSX)
-    return MessagePumpMac::Create();
+    std::unique_ptr<MessagePump> pump(MessagePumpMac::Create());
+    return pump;
 #elif defined(OS_NACL) || defined(OS_AIX)
     // Currently NaCl and AIX don't have a UI MessageLoop.
     // TODO(abarth): Figure out if we need this.
